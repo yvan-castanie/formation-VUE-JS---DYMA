@@ -38,10 +38,10 @@
           <hr />
           <h3> Nombre de carrés : </h3>
           <hr />
-          <div class="col-12">
+          <div class="col-12" v-if="nbrOfSquares" >
             <div class="prevsquare"></div>
           </div>
-          <h3> Ajouter des couleurs !</h3>
+          <h3 v-else> Ajouter des couleurs !</h3>
         </div>
       </div>
       <div class="col-6">
@@ -60,16 +60,27 @@
         squares: []
       },
       methods: {
-        saveSquare() {
-          this.squares.push(`rgb(${this.red},${this.bleu},${this.green}`);
+        resetColor(){
           this.red=0;
           this.bleu=0;
           this.green=0;
+        },
+        saveSquare() {
+          this.squares.push(`rgb(${this.red},${this.bleu},${this.green})`);
+          this.resetColor();
           console.log(this.squares)
         },
 
-        reset() {}
+        reset() {
+          this.squares =[];
+          this.resetColor();console.log(this.squares)
+        }
       },
+      computed:{
+        nbrOfSquares(){
+          return this.squares.length
+        }
+      }
     })
   </script>
 </body>
